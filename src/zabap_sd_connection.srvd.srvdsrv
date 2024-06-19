@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Connection'
+define service ZABAP_SD_Connection {
+  expose ZABAP_I_Connection as Connection;
+  expose ZABAP_I_Flight     as Flight;
+}
