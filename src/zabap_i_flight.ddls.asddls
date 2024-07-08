@@ -9,6 +9,18 @@
     dataClass: #MIXED
 }
 
+
+@UI.chart: [{
+               qualifier: 'LineChart',
+              chartType:         #BULLET ,
+              measures:          ['SeatsOccupied'],
+              measureAttributes: [{
+                    measure:     'SeatsOccupied' ,
+                    role:        #AXIS_1 ,
+                    asDataPoint: true
+                    }]
+              }]
+
 @Search.searchable: true
 define view entity ZABAP_I_Flight
   as select from /dmo/flight
@@ -34,9 +46,29 @@ define view entity ZABAP_I_Flight
 
       }
       plane_type_id  as PlaneTypeId,
-      @UI.lineItem: [{ position: 70 }]
+//      @UI.lineItem: [{ position: 70 }]
       seats_max      as SeatsMax,
-      @UI.lineItem: [{ position: 80 }]
+
+      @UI:{ lineItem: [{ position: 100 ,
+                   type: #AS_CHART,
+                   label: 'Seats Occupied Level',
+                   valueQualifier: 'LineChart'   }]
+      }
+      @UI.dataPoint: { title: 'Seats Occupied' ,
+                         targetValueElement: 'SeatsMax' ,
+                         criticalityCalculation: {
+          improvementDirection: #MAXIMIZE,
+          toleranceRangeLowValue: 75,
+          deviationRangeLowValue: 50
+      }
+                       }
+//@UI:{ lineItem: [{ position: 100 ,
+//                   type: #AS_DATAPOINT,
+//                   label: 'Seats Occupied Level' }]
+//      }
+// @UI.dataPoint: { visualization: #PROGRESS ,
+//                   targetValueElement: 'SeatsMax' }
+
       seats_occupied as SeatsOccupied,
       /*Association*/
       _Ariline

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Travel App'
+define service ZABAP_SD_TRAVEL {
+  expose zabap_c_travel as Travel;
+}
