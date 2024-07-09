@@ -34,7 +34,6 @@ define root view entity zabap_R_Travel as select from ztabap_travel
          last_changed_at                          as LastChangedAt,
 
          /* Associations */
-         /* Associations */
       _Agency,
       _AgencyReview,
       _Customer,
