@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Danone Sales and Revenue'
+define service ZSD_DEMOTABLE {
+  expose ZC_DEMOTABLE as Demo;
+}

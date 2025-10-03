@@ -1,0 +1,48 @@
+managed implementation in class zbp_demotable unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZR_DEMOTABLE alias Table
+persistent table zdemotable
+draft table zdemotable_d
+lock master total etag LastChangedAt
+authorization master ( instance )
+{
+
+
+  field ( mandatory : create )
+
+  Uniquecode;
+
+
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt, LocalLastChangedBy, LocalLastChangedAt, LocalCreatedBy,
+  LocalCreatedAt;
+
+  create ( authorization : global );
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+
+  mapping for zdemotable
+    {
+      Uniquecode         = uniquecode;
+      Attachment         = attachment;
+      Comments           = comments;
+      MimeType           = mimetype;
+      Filename           = filename;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+}
